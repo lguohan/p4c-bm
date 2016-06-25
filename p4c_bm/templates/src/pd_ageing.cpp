@@ -82,7 +82,7 @@ void ${pd_prefix}ageing_notification_cb(const char *hdr, const char *data) {
     const AgeingState *state = device_state[ageing_hdr->switch_id];
     auto got = state->cbs.find(ageing_hdr->table_id);
     if(got != state->cbs.end()) {
-      const AgeingCb &cb = state->cbs.find(ageing_hdr->table_id)->second;
+      const AgeingCb &cb = got->second;
       const uint64_t *handles = reinterpret_cast<const uint64_t *>(data);
       for(unsigned int i = 0; i < ageing_hdr->num_entries; i++) {
         cb.cb_fn(handles[i], cb.cb_cookie);
